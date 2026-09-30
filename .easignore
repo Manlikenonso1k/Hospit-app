@@ -1,0 +1,8 @@
+# Design references and specs — not part of the app build.
+ceo_role_based_home/
+chef_kitchen_queue/
+hospitality_operations_mobile/
+manager_settings_gate_sales/
+order_board_states_detail_sheet/
+waitress_take_an_order/
+*.md

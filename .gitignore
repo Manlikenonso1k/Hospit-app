@@ -1,0 +1,38 @@
+# Expo / RN
+node_modules/
+.expo/
+dist/
+web-build/
+*.tsbuildinfo
+expo-env.d.ts
+
+# Native
+ios/
+android/
+*.orig.*
+
+# Secrets / env
+.env
+.env.local
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# OS
+.DS_Store
+
+# Internal handoff / build specs — not for the public app repo
+CONTEXT.md
+agent-2-build.md
+prompt.md
+instructions.md
+
+# Google Stitch design references (design source, not app code)
+ceo_role_based_home/
+chef_kitchen_queue/
+hospitality_operations_mobile/
+manager_settings_gate_sales/
+order_board_states_detail_sheet/
+waitress_take_an_order/
