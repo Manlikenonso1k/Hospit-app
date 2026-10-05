@@ -53,6 +53,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     predictiveBackGestureEnabled: false,
   },
+  web: {
+    bundler: 'metro',
+    output: 'single',
+    favicon: './assets/favicon.png',
+  },
   plugins: [
     'expo-router',
     'expo-secure-store',

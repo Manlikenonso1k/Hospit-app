@@ -29,6 +29,51 @@ export function useMeals(department?: string) {
   });
 }
 
+/** Manager catalogue — includes unavailable meals for menu management. */
+export function useManagedMeals(department?: string) {
+  const qs = new URLSearchParams({ include_unavailable: '1' });
+  if (department) qs.set('department', department);
+  return useQuery({
+    queryKey: ['meals', 'manage', department ?? 'all'],
+    queryFn: () => apiFetch<Collection<Meal>>(`/meals?${qs.toString()}`),
+  });
+}
+
+type MealInput = {
+  department?: string;
+  name?: string;
+  category?: string | null;
+  price_naira?: number;
+  prep_time_minutes?: number;
+  is_available?: boolean;
+};
+
+export function useCreateMeal() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (input: MealInput) => apiFetch<{ data: Meal }>('/meals', { method: 'POST', body: input }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['meals'] }),
+  });
+}
+
+export function useUpdateMeal() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, ...input }: MealInput & { id: number }) =>
+      apiFetch<{ data: Meal }>(`/meals/${id}`, { method: 'PATCH', body: input }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['meals'] }),
+  });
+}
+
+export function useUploadMealImage() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, image_base64, mime }: { id: number; image_base64: string; mime: string }) =>
+      apiFetch<{ data: Meal }>(`/meals/${id}/image`, { method: 'POST', body: { image_base64, mime } }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['meals'] }),
+  });
+}
+
 export function useOrders(params: { status?: OrderStatus; dept?: string } = {}, refetchInterval?: number) {
   const qs = new URLSearchParams();
   if (params.status) qs.set('status', params.status);
@@ -70,7 +115,7 @@ export function usePlaceOrder() {
   });
 }
 
-function useOrderAction(action: 'accept' | 'ready' | 'complete') {
+function useOrderAction(action: 'accept' | 'ready' | 'complete' | 'nudge' | 'expedite') {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (orderId: number) =>
@@ -85,6 +130,24 @@ function useOrderAction(action: 'accept' | 'ready' | 'complete') {
 export const useAcceptOrder = () => useOrderAction('accept');
 export const useReadyOrder = () => useOrderAction('ready');
 export const useCompleteOrder = () => useOrderAction('complete');
+export const useNudgeOrder = () => useOrderAction('nudge');
+export const useExpediteOrder = () => useOrderAction('expedite');
+
+export function useUnreadCount(refetchInterval: number = POLL.managerBoard) {
+  return useQuery({
+    queryKey: ['notifications', 'unread-count'],
+    queryFn: () => apiFetch<{ count: number }>('/notifications/unread-count'),
+    refetchInterval,
+  });
+}
+
+export function useMarkAllRead() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () => apiFetch<{ count: number }>('/notifications/read-all', { method: 'POST' }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['notifications'] }),
+  });
+}
 
 export function useDeclineOrder() {
   const qc = useQueryClient();
@@ -98,6 +161,41 @@ export function useDeclineOrder() {
       qc.invalidateQueries({ queryKey: ['orders'] });
       qc.invalidateQueries({ queryKey: ['board'] });
     },
+  });
+}
+
+export function useUpdateTenant() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (input: { enabled_departments?: string[]; name?: string; primary_colour?: string }) =>
+      apiFetch<{ tenant: Me['tenant'] }>('/tenant', { method: 'PATCH', body: input }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['me'] }),
+  });
+}
+
+export type Shift = { id: number; department: string; started_at: string } | null;
+
+export function useCurrentShift() {
+  return useQuery({
+    queryKey: ['shift', 'current'],
+    queryFn: () => apiFetch<{ data: Shift }>('/shifts/current'),
+  });
+}
+
+export function useStartShift() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (department?: string) =>
+      apiFetch<{ data: Shift }>('/shifts/start', { method: 'POST', body: department ? { department } : {} }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['shift'] }),
+  });
+}
+
+export function useEndShift() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () => apiFetch<{ data: null }>('/shifts/end', { method: 'POST' }),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['shift'] }),
   });
 }
 

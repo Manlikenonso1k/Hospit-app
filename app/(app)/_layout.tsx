@@ -1,40 +1,46 @@
 import { Redirect, Tabs } from 'expo-router';
 import { View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useMe } from '@/api/hooks';
 import { useAuthStore } from '@/store/authStore';
 import { usePushRegistration } from '@/lib/push';
 import { homeForRoles } from '@/lib/roles';
 import { Loading } from '@/components/ui';
-import { colors } from '@/theme/colors';
+import { colors, fonts } from '@/theme';
 
-type TabName = 'board' | 'order' | 'kitchen' | 'revenue' | 'hosts' | 'account';
+type TabName = 'board' | 'order' | 'kitchen' | 'revenue' | 'hosts' | 'account' | 'menu' | 'myorders';
 
-/** Which tabs each home surfaces. Account is always present (profile + logout). */
+/** Which tabs each home surfaces. Manager matches spec J's five-tab bar. */
 const TABS_BY_HOME: Record<string, TabName[]> = {
-  manager: ['board', 'order', 'kitchen', 'account'],
-  waitress: ['order', 'account'],
+  manager: ['board', 'order', 'kitchen', 'revenue', 'account'],
+  waitress: ['myorders', 'order', 'account'],
   chef: ['kitchen', 'account'],
   ceo: ['revenue', 'account'],
   host: ['hosts', 'account'],
 };
 
-const ICONS: Record<TabName, keyof typeof Ionicons.glyphMap> = {
-  board: 'flame',
+// Spec J glyphs. 'skillet' is not a MaterialIcons name → substituted with
+// 'soup-kitchen' (nearest MaterialIcons glyph).
+const ICONS: Record<TabName, keyof typeof MaterialIcons.glyphMap> = {
+  board: 'local-fire-department',
   order: 'add-circle',
-  kitchen: 'restaurant',
+  kitchen: 'soup-kitchen',
   revenue: 'bar-chart',
   hosts: 'bed',
-  account: 'settings',
+  account: 'tune',
+  menu: 'restaurant-menu',
+  myorders: 'receipt-long',
 };
 
 const LABELS: Record<TabName, string> = {
   board: 'Orders',
   order: 'Take Order',
   kitchen: 'Kitchen',
-  revenue: 'Revenue',
+  revenue: 'Ops',
   hosts: 'Hosts',
   account: 'Settings',
+  menu: 'Menu',
+  myorders: 'My Orders',
 };
 
 export default function AppLayout() {
@@ -57,20 +63,28 @@ export default function AppLayout() {
 
   const home = homeForRoles(me.data.user.roles);
   const visible = new Set(TABS_BY_HOME[home] ?? ['account']);
-  const allTabs: TabName[] = ['board', 'order', 'kitchen', 'revenue', 'hosts', 'account'];
+  // 'menu' is a navigable route (manager menu management), never a tab.
+  const allTabs: TabName[] = ['board', 'order', 'kitchen', 'revenue', 'hosts', 'account', 'menu', 'myorders'];
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.navy,
-        tabBarInactiveTintColor: colors.textMuted,
+        tabBarInactiveTintColor: colors.inkSecondary,
         tabBarStyle: {
+          backgroundColor: 'rgba(255,255,255,0.95)',
           borderTopColor: colors.border,
-          height: 88,
+          height: 64,
           paddingTop: 8,
+          paddingBottom: 8,
+          shadowColor: '#0F172A',
+          shadowOffset: { width: 0, height: -4 },
+          shadowOpacity: 0.06,
+          shadowRadius: 8,
+          elevation: 8,
         },
-        tabBarLabelStyle: { fontSize: 11, fontWeight: '700' },
+        tabBarLabelStyle: { fontFamily: fonts.bold, fontSize: 11 },
       }}
     >
       {allTabs.map((name) => (
@@ -80,9 +94,7 @@ export default function AppLayout() {
           options={{
             title: LABELS[name],
             href: visible.has(name) ? undefined : null,
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name={ICONS[name]} size={size} color={color} />
-            ),
+            tabBarIcon: ({ color }) => <MaterialIcons name={ICONS[name]} size={24} color={color} />,
           }}
         />
       ))}

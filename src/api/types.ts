@@ -2,6 +2,7 @@ import type { StatusColour } from '@/theme/colors';
 
 export type Department =
   | 'main_kitchen'
+  | 'grill_kitchen'
   | 'barbecue'
   | 'ice_cream'
   | 'gate_sales'
@@ -41,6 +42,7 @@ export type Meal = {
   price: number; // kobo
   prep_time_minutes: number;
   is_available: boolean;
+  image_url: string | null;
 };
 
 export type OrderItem = {
@@ -69,6 +71,7 @@ export type Order = {
   table_id: number | null;
   guest_ref: string | null;
   placed_by?: string | null;
+  chef?: string | null;
   placed_at: string | null;
   target_minutes: number;
   due_at: string | null;
@@ -77,6 +80,8 @@ export type Order = {
   completed_at: string | null;
   declined_at: string | null;
   decline_reason: string | null;
+  last_nudged_at: string | null;
+  expedited_at: string | null;
   total_amount: number; // kobo
   seconds_remaining: number;
   server_time: string;

@@ -25,12 +25,17 @@ export const HOME_ROUTE: Record<HomeKind, string> = {
   host: '/(app)/hosts',
 };
 
+/** The full catalogue a business can enable, for the onboarding/setup screen. */
+export const KITCHEN_DEPARTMENTS: Department[] = ['main_kitchen', 'grill_kitchen', 'barbecue', 'ice_cream'];
+export const SERVICE_DEPARTMENTS: Department[] = ['gate_sales', 'hosts', 'front_desk'];
+
 /** Human label for a department key. */
 export function departmentLabel(dept: Department | string): string {
   const map: Record<string, string> = {
     main_kitchen: 'Main Kitchen',
-    barbecue: 'Barbecue',
-    ice_cream: 'Ice Cream',
+    grill_kitchen: 'Grill Kitchen',
+    barbecue: 'Barbecue Hut',
+    ice_cream: 'Ice Cream Counter',
     gate_sales: 'Gate Sales',
     hosts: 'Hosts',
     front_desk: 'Front Desk',

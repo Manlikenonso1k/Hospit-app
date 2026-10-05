@@ -1,10 +1,13 @@
+import { useMemo, useState } from 'react';
 import { router } from 'expo-router';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useMe } from '@/api/hooks';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useMe, useUpdateTenant } from '@/api/hooks';
 import { useLogout } from '@/api/auth';
 import { AppHeader } from '@/components/AppHeader';
 import { Button, Card, Loading } from '@/components/ui';
+import { KITCHEN_DEPARTMENTS, SERVICE_DEPARTMENTS, departmentLabel } from '@/lib/roles';
 import { config } from '@/config';
 import { colors } from '@/theme/colors';
 
@@ -15,6 +18,7 @@ export default function AccountScreen() {
   if (!me.data) return <View style={{ flex: 1, backgroundColor: colors.bg }}><Loading /></View>;
 
   const { user, tenant } = me.data;
+  const isManager = user.roles.some((r) => ['Manager', 'Super Admin', 'Admin'].includes(r));
 
   const doLogout = () =>
     logout.mutate(undefined, { onSettled: () => router.replace('/welcome') });
@@ -36,6 +40,25 @@ export default function AccountScreen() {
           {user.department ? <Row label="Department" value={user.department} /> : null}
         </Card>
 
+        {isManager ? (
+          <Card>
+            <Pressable style={styles.linkRow} onPress={() => router.push('/(app)/menu' as never)}>
+              <View style={styles.linkLeft}>
+                <MaterialIcons name="restaurant-menu" size={22} color={colors.navy} />
+                <View>
+                  <Text style={styles.linkTitle}>Menu & prices</Text>
+                  <Text style={styles.linkSub}>Add products, set prices, upload photos</Text>
+                </View>
+              </View>
+              <MaterialIcons name="chevron-right" size={24} color={colors.outline} />
+            </Pressable>
+          </Card>
+        ) : null}
+
+        {isManager && tenant ? (
+          <DepartmentsCard key={(tenant.enabled_departments ?? []).join(',')} enabled={tenant.enabled_departments ?? []} />
+        ) : null}
+
         <Card>
           <Text style={styles.sectionTitle}>Connection</Text>
           <Row label="Environment" value={config.variant} />
@@ -44,6 +67,71 @@ export default function AccountScreen() {
 
         <Button label="Log out" variant="danger" onPress={doLogout} loading={logout.isPending} />
       </ScrollView>
+    </View>
+  );
+}
+
+/**
+ * Onboarding / white-label setup: the manager chooses which stations this
+ * business runs. enabled_departments flows through /api/me, so toggling here
+ * reshapes the waitress kitchen picker and the manager board for everyone.
+ */
+function DepartmentsCard({ enabled }: { enabled: string[] }) {
+  const update = useUpdateTenant();
+  const [selected, setSelected] = useState<string[]>(enabled);
+
+  const toggle = (dept: string) =>
+    setSelected((cur) => (cur.includes(dept) ? cur.filter((d) => d !== dept) : [...cur, dept]));
+
+  const changed = useMemo(
+    () => [...selected].sort().join(',') !== [...enabled].sort().join(','),
+    [selected, enabled],
+  );
+  const canSave = changed && selected.length > 0 && !update.isPending;
+
+  return (
+    <Card>
+      <Text style={styles.sectionTitle}>Business setup · Departments</Text>
+      <Text style={styles.hint}>
+        Turn on the stations this business runs. Waiters can take orders for any enabled kitchen.
+      </Text>
+
+      <Text style={styles.groupLabel}>Kitchens</Text>
+      {KITCHEN_DEPARTMENTS.map((d) => (
+        <ToggleRow key={d} label={departmentLabel(d)} on={selected.includes(d)} onToggle={() => toggle(d)} />
+      ))}
+
+      <Text style={styles.groupLabel}>Other stations</Text>
+      {SERVICE_DEPARTMENTS.map((d) => (
+        <ToggleRow key={d} label={departmentLabel(d)} on={selected.includes(d)} onToggle={() => toggle(d)} />
+      ))}
+
+      {selected.length === 0 ? (
+        <Text style={styles.warn}>Enable at least one station.</Text>
+      ) : null}
+
+      <View style={{ marginTop: 12 }}>
+        <Button
+          label="Save departments"
+          onPress={() => update.mutate({ enabled_departments: selected })}
+          disabled={!canSave}
+          loading={update.isPending}
+        />
+      </View>
+    </Card>
+  );
+}
+
+function ToggleRow({ label, on, onToggle }: { label: string; on: boolean; onToggle: () => void }) {
+  return (
+    <View style={styles.row}>
+      <Text style={styles.toggleLabel}>{label}</Text>
+      <Switch
+        value={on}
+        onValueChange={onToggle}
+        trackColor={{ true: colors.navy, false: colors.border }}
+        thumbColor="#fff"
+      />
     </View>
   );
 }
@@ -64,8 +152,16 @@ const styles = StyleSheet.create({
   name: { fontSize: 22, fontWeight: '800', color: colors.text },
   roles: { fontSize: 14, color: colors.textMuted, marginTop: 4, fontWeight: '600' },
   divider: { height: 1, backgroundColor: colors.border, marginVertical: 14 },
-  sectionTitle: { fontSize: 13, fontWeight: '800', color: colors.textMuted, letterSpacing: 0.4, marginBottom: 10, textTransform: 'uppercase' },
+  sectionTitle: { fontSize: 13, fontWeight: '800', color: colors.textMuted, letterSpacing: 0.4, marginBottom: 6, textTransform: 'uppercase' },
+  hint: { fontSize: 13, color: colors.textMuted, marginBottom: 8 },
+  groupLabel: { fontSize: 12, fontWeight: '800', color: colors.text, marginTop: 10, marginBottom: 2, letterSpacing: 0.3 },
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 8, gap: 12 },
   rowLabel: { fontSize: 14, color: colors.textMuted, fontWeight: '600' },
   rowValue: { fontSize: 14, color: colors.text, fontWeight: '600', flexShrink: 1, textAlign: 'right' },
+  toggleLabel: { fontSize: 15, color: colors.text, fontWeight: '600' },
+  warn: { fontSize: 13, color: colors.red, marginTop: 8, fontWeight: '600' },
+  linkRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  linkLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  linkTitle: { fontSize: 16, fontWeight: '800', color: colors.text },
+  linkSub: { fontSize: 13, color: colors.textMuted, marginTop: 2 },
 });

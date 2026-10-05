@@ -19,6 +19,7 @@ export function usePushRegistration(enabled: boolean) {
 
   useEffect(() => {
     if (!enabled) return;
+    if (Platform.OS === 'web') return; // no device push in the browser (dev testing)
     if (isExpoGo) {
       if (__DEV__) console.log('Push skipped in Expo Go — use a development build to test push.');
       return;
