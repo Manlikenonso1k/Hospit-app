@@ -35,7 +35,9 @@ const BUNDLE_ID_BY_VARIANT: Record<Variant, string> = {
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: NAME_BY_VARIANT[VARIANT],
-  slug: 'hospi-sales',
+  // Must match the EAS project (projectId below); the slug is Expo's internal
+  // project identifier and does not affect the app's display name or package id.
+  slug: 'nonso',
   scheme: 'hospisales',
   version: '1.0.0',
   orientation: 'portrait',
