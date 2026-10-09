@@ -101,3 +101,14 @@ automatically — no role picker.
   ```
 
 See `..\Iceland\RUN_LOCAL.md` for the full backend/API reference.
+ to see data to show capabilitly
+
+
+ php artisan db:seed --class="Database\Seeders\HospiDemoSeeder" --force
+
+
+Delete wrong/seeded data
+
+php artisan hospi:demo-reset           # delete just the demo ORDERS (keep accounts + menu)
+php artisan hospi:demo-reset --wipe    # remove the ENTIRE demo tenant: orders, menu, tables, all staff
+php artisan hospi:demo-reset --force   # skip the "are you sure?" prompt (needed in scripts)

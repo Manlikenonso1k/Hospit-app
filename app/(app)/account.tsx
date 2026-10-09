@@ -8,6 +8,8 @@ import { useLogout } from '@/api/auth';
 import { AppHeader } from '@/components/AppHeader';
 import { Button, Card, Loading } from '@/components/ui';
 import { KITCHEN_DEPARTMENTS, SERVICE_DEPARTMENTS, departmentLabel } from '@/lib/roles';
+import { useSettingsStore } from '@/store/settingsStore';
+import { playAlert } from '@/lib/alert';
 import { config } from '@/config';
 import { colors } from '@/theme/colors';
 
@@ -58,6 +60,8 @@ export default function AccountScreen() {
             ) : null}
           </Card>
         ) : null}
+
+        <NotificationsCard />
 
         {isManager && tenant ? (
           <DepartmentsCard key={(tenant.enabled_departments ?? []).join(',')} enabled={tenant.enabled_departments ?? []} />
@@ -122,6 +126,32 @@ function DepartmentsCard({ enabled }: { enabled: string[] }) {
           loading={update.isPending}
         />
       </View>
+    </Card>
+  );
+}
+
+/**
+ * Alerts the app raises in the foreground (new order, manager nudge, order
+ * ready) flash on screen; this adds an audible chime + haptic buzz so they're
+ * noticed on a busy floor. Toggling it on plays the sound once as a preview.
+ */
+function NotificationsCard() {
+  const soundEnabled = useSettingsStore((s) => s.soundEnabled);
+  const setSoundEnabled = useSettingsStore((s) => s.setSoundEnabled);
+
+  return (
+    <Card>
+      <Text style={styles.sectionTitle}>Notifications</Text>
+      <Text style={styles.hint}>Play a chime and vibrate when a new order, nudge or "ready" alert pops up.</Text>
+      <ToggleRow
+        label="Alert sounds"
+        on={soundEnabled}
+        onToggle={() => {
+          const next = !soundEnabled;
+          setSoundEnabled(next);
+          if (next) void playAlert();
+        }}
+      />
     </Card>
   );
 }

@@ -30,6 +30,8 @@ Full marketing feature list: **[features.md](./features.md)**. Highlights:
   **My Orders** with "order ready" alerts to pick up and serve.
 - **Chef** station queue with **new-order alerts**, **shifts** (see which chef
   made each meal), accept / decline-with-reason / ready.
+- **Audible alerts:** new order, manager nudge and "order ready" chime + vibrate
+  (not just flash), with an on/off toggle in Settings.
 - **Multiple kitchen stations** (Main Kitchen, Grill Kitchen, Barbecue, Ice Cream)
   added as data, not code. White-label, multi-tenant, isolated per business.
 

@@ -19,6 +19,7 @@ import { AppHeader } from '@/components/AppHeader';
 import { OrderTicketCard } from '@/components/OrderTicketCard';
 import { Button, EmptyState, ErrorState, Loading } from '@/components/ui';
 import { departmentLabel } from '@/lib/roles';
+import { playAlert } from '@/lib/alert';
 import { serverNow, useOverduePulse } from '@/lib/clock';
 import { IncomingTransfers, SendTransferButton } from '@/components/transfers';
 import { colors, fonts, type } from '@/theme';
@@ -73,7 +74,10 @@ export default function KitchenScreen() {
         if (['pending', 'accepted'].includes(o.status)) fresh = o;
       }
     }
-    if (fresh) setNudgePopup(fresh);
+    if (fresh) {
+      setNudgePopup(fresh);
+      void playAlert();
+    }
   }, [queue.data]);
 
   // Detect a brand-new order landing in the queue and alert the chef.
@@ -93,7 +97,10 @@ export default function KitchenScreen() {
         if (o.status === 'pending') fresh = o;
       }
     }
-    if (fresh) setNewOrderPopup(fresh);
+    if (fresh) {
+      setNewOrderPopup(fresh);
+      void playAlert();
+    }
   }, [queue.data]);
 
   const submitDecline = () => {

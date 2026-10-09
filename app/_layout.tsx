@@ -15,12 +15,14 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ApiError } from '@/api/client';
 import { useAuthStore } from '@/store/authStore';
+import { useSettingsStore } from '@/store/settingsStore';
 
 // Hold the splash until Inter is loaded so text never flashes in a fallback font.
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
   const hydrate = useAuthStore((s) => s.hydrate);
+  const hydrateSettings = useSettingsStore((s) => s.hydrate);
 
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -54,7 +56,8 @@ export default function RootLayout() {
 
   useEffect(() => {
     hydrate();
-  }, [hydrate]);
+    hydrateSettings();
+  }, [hydrate, hydrateSettings]);
 
   if (!fontsLoaded) return null;
 

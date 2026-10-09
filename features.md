@@ -104,6 +104,10 @@ _Last updated: 2026-10-09_
 
 - **In-app alerts that work everywhere** (no reliance on OS push to stay in the
   loop): new order, overdue, declined, nudged, ready, expedited.
+- **Sound + vibration on the alerts that matter.** A new ticket, a manager nudge
+  and an "order ready" don't just flash — they chime and buzz so they're noticed
+  on a loud, busy floor, even with the phone in a pocket. One tap in Settings
+  turns alert sounds off.
 - **Push notifications** on real devices for the moments that matter.
 - **Notification bell** with a live unread count on every screen.
 

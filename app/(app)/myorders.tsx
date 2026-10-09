@@ -14,6 +14,7 @@ import { AppHeader } from '@/components/AppHeader';
 import { OrderTicketCard } from '@/components/OrderTicketCard';
 import { Button, EmptyState, ErrorState, Loading } from '@/components/ui';
 import { departmentLabel } from '@/lib/roles';
+import { playAlert } from '@/lib/alert';
 import { useOverduePulse } from '@/lib/clock';
 import { IncomingTransfers, SendTransferButton } from '@/components/transfers';
 import { colors, fonts, type } from '@/theme';
@@ -64,7 +65,10 @@ export default function MyOrdersScreen() {
         if (o.status === 'ready') fresh = o;
       }
     }
-    if (fresh) setReadyPopup(fresh);
+    if (fresh) {
+      setReadyPopup(fresh);
+      void playAlert();
+    }
   }, [mine.data]);
 
   if (!me.data) return <View style={styles.root}><Loading /></View>;
