@@ -17,7 +17,7 @@
         "buildType": "apk"
       },
       "env": {
-        "APP_VARIANT": "staging"
+        "APP_VARIANT": "production"
       }
     },
     "production": {
