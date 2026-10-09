@@ -37,6 +37,7 @@ manager_settings_gate_sales/
 order_board_states_detail_sheet/
 waitress_take_an_order/
 
-# Lockfile is generated per-platform; let EAS resolve on Linux (Windows lock
-# omits Linux-only deps like react-native-reanimated, breaking `npm ci`).
+# Lockfile omits some Linux-only RN metro/babel deps when generated on Windows;
+# EAS builds lock-free via npm install (EAS_BUILD_SKIP_LOCKFILE_CHECK=1) with
+# reanimated/worklets pinned in package.json for deterministic resolution.
 package-lock.json
