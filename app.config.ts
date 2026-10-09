@@ -14,7 +14,9 @@ const VARIANT = (process.env.APP_VARIANT as Variant) ?? 'development';
 
 const API_BASE_URL_BY_VARIANT: Record<Variant, string> = {
   development: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://192.168.0.100:8000/api',
-  staging: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://staging.icelandbeach.com/api',
+  // Preview (the APK you send your boss) runs the "staging" variant — point it at
+  // the live Iceland backend so the installed app can actually log in.
+  staging: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://icelandbeach.com/api',
   production: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://icelandbeach.com/api',
 };
 
@@ -81,7 +83,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     apiBaseUrl: API_BASE_URL_BY_VARIANT[VARIANT],
     router: {},
     eas: {
-      projectId: process.env.EAS_PROJECT_ID ?? '',
+      // The EAS project this app is linked to (eas.dev → project settings).
+      projectId: process.env.EAS_PROJECT_ID ?? '5ef7f378-815d-4a1c-af5c-812e1521eb75',
     },
   },
 });

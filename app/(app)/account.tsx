@@ -19,6 +19,7 @@ export default function AccountScreen() {
 
   const { user, tenant } = me.data;
   const isManager = user.roles.some((r) => ['Manager', 'Super Admin', 'Admin'].includes(r));
+  const isStaffCreator = user.roles.some((r) => ['Manager', 'CEO', 'Super Admin', 'Admin'].includes(r));
 
   const doLogout = () =>
     logout.mutate(undefined, { onSettled: () => router.replace('/welcome') });
@@ -40,18 +41,21 @@ export default function AccountScreen() {
           {user.department ? <Row label="Department" value={user.department} /> : null}
         </Card>
 
-        {isManager ? (
+        {isStaffCreator ? (
           <Card>
-            <Pressable style={styles.linkRow} onPress={() => router.push('/(app)/menu' as never)}>
-              <View style={styles.linkLeft}>
-                <MaterialIcons name="restaurant-menu" size={22} color={colors.navy} />
-                <View>
-                  <Text style={styles.linkTitle}>Menu & prices</Text>
-                  <Text style={styles.linkSub}>Add products, set prices, upload photos</Text>
-                </View>
-              </View>
-              <MaterialIcons name="chevron-right" size={24} color={colors.outline} />
-            </Pressable>
+            <Text style={styles.sectionTitle}>Manage</Text>
+            <LinkRow
+              icon="people"
+              title="Staff"
+              sub={isManager ? 'Create waiters, chefs & hosts' : 'Create manager accounts'}
+              onPress={() => router.push('/(app)/staff' as never)}
+            />
+            {isManager ? (
+              <>
+                <LinkRow icon="restaurant-menu" title="Menu & prices" sub="Add products, set prices, upload photos" onPress={() => router.push('/(app)/menu' as never)} />
+                <LinkRow icon="deck" title="Tables" sub="Tables, cabanas & sunbeds" onPress={() => router.push('/(app)/tables' as never)} />
+              </>
+            ) : null}
           </Card>
         ) : null}
 
@@ -136,6 +140,31 @@ function ToggleRow({ label, on, onToggle }: { label: string; on: boolean; onTogg
   );
 }
 
+function LinkRow({
+  icon,
+  title,
+  sub,
+  onPress,
+}: {
+  icon: keyof typeof MaterialIcons.glyphMap;
+  title: string;
+  sub: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable style={styles.linkRow} onPress={onPress}>
+      <View style={styles.linkLeft}>
+        <MaterialIcons name={icon} size={22} color={colors.navy} />
+        <View style={{ flexShrink: 1 }}>
+          <Text style={styles.linkTitle}>{title}</Text>
+          <Text style={styles.linkSub}>{sub}</Text>
+        </View>
+      </View>
+      <MaterialIcons name="chevron-right" size={24} color={colors.outline} />
+    </Pressable>
+  );
+}
+
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <View style={styles.row}>
@@ -160,7 +189,7 @@ const styles = StyleSheet.create({
   rowValue: { fontSize: 14, color: colors.text, fontWeight: '600', flexShrink: 1, textAlign: 'right' },
   toggleLabel: { fontSize: 15, color: colors.text, fontWeight: '600' },
   warn: { fontSize: 13, color: colors.red, marginTop: 8, fontWeight: '600' },
-  linkRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  linkRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10, gap: 12 },
   linkLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   linkTitle: { fontSize: 16, fontWeight: '800', color: colors.text },
   linkSub: { fontSize: 13, color: colors.textMuted, marginTop: 2 },

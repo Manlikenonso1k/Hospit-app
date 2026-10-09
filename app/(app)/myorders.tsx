@@ -15,6 +15,7 @@ import { OrderTicketCard } from '@/components/OrderTicketCard';
 import { Button, EmptyState, ErrorState, Loading } from '@/components/ui';
 import { departmentLabel } from '@/lib/roles';
 import { useOverduePulse } from '@/lib/clock';
+import { IncomingTransfers, SendTransferButton } from '@/components/transfers';
 import { colors, fonts, type } from '@/theme';
 
 const POLL = 5000; // snappy so "ready" alerts land quickly
@@ -92,9 +93,14 @@ export default function MyOrdersScreen() {
               suppressActions
               actions={
                 item.status === 'ready' ? (
-                  <View style={{ flex: 1 }}>
-                    <Button label="Mark served" onPress={() => complete.mutate(item.id)} loading={complete.isPending} />
-                  </View>
+                  <>
+                    <View style={{ flex: 1 }}>
+                      <Button label="Mark served" onPress={() => complete.mutate(item.id)} loading={complete.isPending} />
+                    </View>
+                    <SendTransferButton order={item} />
+                  </>
+                ) : ['pending', 'accepted'].includes(item.status) ? (
+                  <SendTransferButton order={item} />
                 ) : undefined
               }
             />
@@ -113,6 +119,7 @@ export default function MyOrdersScreen() {
       />
 
       <ReadyPopup order={readyPopup} onDismiss={() => setReadyPopup(null)} />
+      <IncomingTransfers />
     </View>
   );
 }

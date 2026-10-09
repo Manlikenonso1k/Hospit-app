@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Animated, Easing, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import type { Order, OrderItem } from '@/api/types';
 import { useExpediteOrder, useNudgeOrder } from '@/api/hooks';
@@ -317,6 +317,8 @@ function OverdueActions({
   const nudge = useNudgeOrder();
   const [phase, setPhase] = useState<'idle' | 'nudging' | 'paged'>(order.last_nudged_at ? 'paged' : 'idle');
   const label = order.department === 'main_kitchen' ? 'NUDGE KITCHEN' : 'NUDGE STATION';
+  const phone = order.chef_phone ?? order.placed_by_phone ?? null;
+  const openLink = (url: string) => Linking.openURL(url).catch(() => {});
 
   const onNudge = () => {
     if (phase !== 'idle') return;
@@ -355,10 +357,22 @@ function OverdueActions({
         )}
       </Pressable>
 
-      {/* No server phone in the payload, so this opens the detail sheet (spec fallback). */}
-      <Pressable style={styles.squareBtn} onPress={() => onOpenDetail?.(order)}>
-        <MaterialIcons name="more-vert" size={22} color={colors.navy} />
-      </Pressable>
+      {/* Call / text the chef (falls back to the server's phone). If neither has
+          a number on file, offer the detail sheet instead. */}
+      {phone ? (
+        <>
+          <Pressable style={styles.squareBtn} onPress={() => openLink(`tel:${phone}`)} accessibilityLabel="Call">
+            <MaterialIcons name="call" size={22} color={colors.navy} />
+          </Pressable>
+          <Pressable style={styles.squareBtn} onPress={() => openLink(`sms:${phone}`)} accessibilityLabel="Text">
+            <MaterialIcons name="sms" size={22} color={colors.navy} />
+          </Pressable>
+        </>
+      ) : (
+        <Pressable style={styles.squareBtn} onPress={() => onOpenDetail?.(order)}>
+          <MaterialIcons name="more-vert" size={22} color={colors.navy} />
+        </Pressable>
+      )}
     </View>
   );
 }

@@ -7,6 +7,32 @@ countdown, and overdue orders escalate to the manager automatically.
 Android + iOS, built with **Expo (managed) + React Native + TypeScript**. It is a
 client for an additive JSON API on an existing Laravel 12 + Filament backend.
 
+## Features
+
+Full marketing feature list: **[features.md](./features.md)**. Highlights:
+
+- **Server-owned order timers** + traffic-light Order Board (green/amber/red) with
+  automatic overdue escalation to the manager.
+- **Role-based** (Manager, Waiter, Chef, CEO, Host) — assigned by the business,
+  auto-routed home; sign in by email or phone.
+- **Manager Nudge** (loud chef alerts) and **Expedite**; **Menu & prices**
+  management with product photo upload; **per-business department setup**;
+  **in-app staff creation** (manager → waiter/chef/host · CEO → manager/waiter/
+  chef/host) and **tables** management.
+- **Operations dashboard** (CEO home + manager Ops tab): live gross revenue by
+  period, **per-department earnings** (share, tickets, avg prep), an overdue
+  alert, and **delay accountability** — which chefs ran late on the cook and which
+  waitresses were slow to pick up.
+- **Order hand-offs:** a waiter sends an order to another waiter, a chef to
+  another chef on the same station — the recipient accepts or declines. A
+  **manager can reassign** any order's waitress or chef directly.
+- **Waiter Take Order** (photo menu, search, notes, multi-kitchen cart) and
+  **My Orders** with "order ready" alerts to pick up and serve.
+- **Chef** station queue with **new-order alerts**, **shifts** (see which chef
+  made each meal), accept / decline-with-reason / ready.
+- **Multiple kitchen stations** (Main Kitchen, Grill Kitchen, Barbecue, Ice Cream)
+  added as data, not code. White-label, multi-tenant, isolated per business.
+
 ## Stack
 
 - Expo SDK 57 · Expo Router (file-based navigation)
@@ -43,6 +69,17 @@ npx expo start        # scan the QR with Expo Go
 ```bash
 npm run lint          # tsc --noEmit
 ```
+
+# Terminal 1 — API                 (Documents\Iceland)
+php artisan serve --host=0.0.0.0 --port=8000
+
+# Terminal 2 — overdue scheduler    (Documents\Iceland)
+php artisan schedule:work
+
+# Terminal 3 — web app              (Documents\iceland app)
+npx expo start --web     # then open http://localhost:8081
+
+
 Open separate browser tabs at http://localhost:8081 — each tab is its own session:
 
 Tab 1 → manager@hospi.test (Order Board)

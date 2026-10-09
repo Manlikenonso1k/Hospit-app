@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useMe, useMeals, usePlaceOrder } from '@/api/hooks';
+import { useMe, useMeals, usePlaceOrder, useTables } from '@/api/hooks';
 import { ApiError } from '@/api/client';
 import type { Department, Meal } from '@/api/types';
 import { AppHeader } from '@/components/AppHeader';
@@ -73,8 +73,10 @@ export default function OrderScreen() {
   const totalKobo = selectedIds.reduce((sum, id) => sum + (mealById.get(id)?.price ?? 0) * cart[id].qty, 0);
   const estMins = selectedIds.reduce((max, id) => Math.max(max, mealById.get(id)?.prep_time_minutes ?? 0), 0);
 
+  const firing = useRef(false);
   const fire = () => {
-    if (itemCount === 0) return;
+    if (itemCount === 0 || firing.current || place.isPending) return;
+    firing.current = true;
     setFeedback(null);
 
     // Group the cart by kitchen — one order per department so each station
@@ -100,6 +102,9 @@ export default function OrderScreen() {
       .catch((e) => {
         const msg = e instanceof ApiError ? e.firstError() ?? e.message : 'Could not fire the order';
         setFeedback({ kind: 'err', text: msg });
+      })
+      .finally(() => {
+        firing.current = false;
       });
   };
 
@@ -357,15 +362,26 @@ function MealCard({
 }
 
 function DestinationModal({ open, value, onSave, onClose }: { open: boolean; value: string; onSave: (v: string) => void; onClose: () => void }) {
+  const tables = useTables();
   const [v, setV] = useState(value);
+  const list = tables.data?.data ?? [];
   return (
     <Modal visible={open} transparent animationType="slide" onRequestClose={onClose}>
       <Pressable style={styles.backdrop} onPress={onClose} />
       <View style={styles.inputSheet}>
         <View style={styles.handle} />
         <Text style={styles.inputSheetTitle}>Destination</Text>
-        <Text style={styles.inputSheetSub}>Table, cabana, sunbed or room this order goes to.</Text>
-        <TextInput style={styles.sheetInput} value={v} onChangeText={setV} autoFocus placeholder="e.g. Cabana 04" placeholderTextColor={colors.outline} />
+        <Text style={styles.inputSheetSub}>Pick a table, or type a custom spot.</Text>
+        {list.length ? (
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingVertical: 4 }}>
+            {list.map((t) => (
+              <Pressable key={t.id} style={styles.tableChip} onPress={() => onSave(t.name)}>
+                <Text style={styles.tableChipText}>{t.name}</Text>
+              </Pressable>
+            ))}
+          </ScrollView>
+        ) : null}
+        <TextInput style={styles.sheetInput} value={v} onChangeText={setV} placeholder="Or type: Cabana 04" placeholderTextColor={colors.outline} />
         <Pressable style={styles.sheetSave} onPress={() => onSave(v)}>
           <Text style={styles.sheetSaveText}>Save</Text>
         </Pressable>
@@ -466,4 +482,6 @@ const styles = StyleSheet.create({
   sheetInput: { backgroundColor: colors.surface, borderWidth: 1.5, borderColor: colors.border, borderRadius: 12, paddingHorizontal: 14, height: 52, fontSize: 16, color: colors.text },
   sheetSave: { height: 52, borderRadius: 12, backgroundColor: colors.navy, alignItems: 'center', justifyContent: 'center', marginTop: 4 },
   sheetSaveText: { ...type.labelLg, color: '#fff' },
+  tableChip: { paddingHorizontal: 16, paddingVertical: 10, borderRadius: 999, backgroundColor: colors.fillHigh },
+  tableChipText: { ...type.labelMd, fontFamily: fonts.bold, color: colors.navy },
 });

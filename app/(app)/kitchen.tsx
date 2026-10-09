@@ -20,6 +20,7 @@ import { OrderTicketCard } from '@/components/OrderTicketCard';
 import { Button, EmptyState, ErrorState, Loading } from '@/components/ui';
 import { departmentLabel } from '@/lib/roles';
 import { serverNow, useOverduePulse } from '@/lib/clock';
+import { IncomingTransfers, SendTransferButton } from '@/components/transfers';
 import { colors, fonts, type } from '@/theme';
 
 // The chef polls faster than other roles so a manager nudge lands quickly.
@@ -46,6 +47,7 @@ export default function KitchenScreen() {
   const [reason, setReason] = useState('');
   const [reasonError, setReasonError] = useState<string | null>(null);
   const [nudgePopup, setNudgePopup] = useState<Order | null>(null);
+  const [newOrderPopup, setNewOrderPopup] = useState<Order | null>(null);
 
   const orders = useMemo(
     () => (queue.data?.data ?? []).filter((o) => ['pending', 'accepted'].includes(o.status)),
@@ -72,6 +74,26 @@ export default function KitchenScreen() {
       }
     }
     if (fresh) setNudgePopup(fresh);
+  }, [queue.data]);
+
+  // Detect a brand-new order landing in the queue and alert the chef.
+  const seenOrders = useRef<Set<number>>(new Set());
+  const seededOrders = useRef(false);
+  useEffect(() => {
+    const data = queue.data?.data ?? [];
+    if (!seededOrders.current) {
+      data.forEach((o) => seenOrders.current.add(o.id));
+      seededOrders.current = true;
+      return;
+    }
+    let fresh: Order | null = null;
+    for (const o of data) {
+      if (!seenOrders.current.has(o.id)) {
+        seenOrders.current.add(o.id);
+        if (o.status === 'pending') fresh = o;
+      }
+    }
+    if (fresh) setNewOrderPopup(fresh);
   }, [queue.data]);
 
   const submitDecline = () => {
@@ -121,7 +143,9 @@ export default function KitchenScreen() {
         }
       />
 
+      <NewOrderPopup order={newOrderPopup} onDismiss={() => setNewOrderPopup(null)} />
       <NudgePopup order={nudgePopup} onDismiss={() => setNudgePopup(null)} />
+      <IncomingTransfers />
 
       <Modal visible={!!declineFor} transparent animationType="slide" onRequestClose={() => setDeclineFor(null)}>
         <View style={styles.modalWrap}>
@@ -181,9 +205,12 @@ function QueueItem({
               </View>
             </>
           ) : (
-            <View style={{ flex: 1 }}>
-              <Button label="Mark ready" onPress={() => ready.mutate(order.id)} loading={ready.isPending} />
-            </View>
+            <>
+              <View style={{ flex: 1 }}>
+                <Button label="Mark ready" onPress={() => ready.mutate(order.id)} loading={ready.isPending} />
+              </View>
+              <SendTransferButton order={order} />
+            </>
           )
         }
       />
@@ -218,6 +245,30 @@ function NudgePopup({ order, onDismiss }: { order: Order | null; onDismiss: () =
           ) : null}
           <Pressable style={styles.popupBtn} onPress={onDismiss}>
             <Text style={styles.popupBtnText}>ON IT</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+function NewOrderPopup({ order, onDismiss }: { order: Order | null; onDismiss: () => void }) {
+  return (
+    <Modal visible={!!order} transparent animationType="fade" onRequestClose={onDismiss}>
+      <View style={styles.popupBackdrop}>
+        <View style={styles.popupCard}>
+          <View style={[styles.popupIcon, { backgroundColor: colors.navy }]}>
+            <MaterialIcons name="receipt-long" size={34} color="#fff" />
+          </View>
+          <Text style={[styles.popupKicker, { color: colors.navy }]}>NEW ORDER</Text>
+          <Text style={styles.popupTitle}>Order #{order?.id} just came in</Text>
+          {order ? (
+            <Text style={styles.popupBody}>
+              {departmentLabel(order.department)} · {orderLocation(order)}. Accept it to start the clock.
+            </Text>
+          ) : null}
+          <Pressable style={[styles.popupBtn, { backgroundColor: colors.navy }]} onPress={onDismiss}>
+            <Text style={styles.popupBtnText}>VIEW</Text>
           </Pressable>
         </View>
       </View>

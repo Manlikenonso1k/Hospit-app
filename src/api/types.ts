@@ -71,7 +71,9 @@ export type Order = {
   table_id: number | null;
   guest_ref: string | null;
   placed_by?: string | null;
+  placed_by_phone?: string | null;
   chef?: string | null;
+  chef_phone?: string | null;
   placed_at: string | null;
   target_minutes: number;
   due_at: string | null;
@@ -91,4 +93,32 @@ export type Order = {
 export type Collection<T> = {
   data: T[];
   server_time?: string;
+};
+
+export type RevenuePeriod = 'today' | 'week' | 'month';
+
+export type DepartmentRevenue = {
+  department: Department;
+  revenue: number; // kobo
+  tickets: number;
+  share: number; // percent of gross
+  overdue: number;
+  avg_prep_minutes: number | null;
+};
+
+export type DelayEntry = { name: string; count: number };
+
+export type RevenueDashboard = {
+  period: RevenuePeriod;
+  server_time: string;
+  total_gross: number; // kobo
+  orders_fulfilled: number;
+  avg_ticket: number; // kobo
+  overdue_count: number;
+  avg_delay_minutes: number;
+  departments: DepartmentRevenue[];
+  delays: {
+    chefs: DelayEntry[];
+    waitresses: DelayEntry[];
+  };
 };

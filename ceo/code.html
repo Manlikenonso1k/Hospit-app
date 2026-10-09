@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "error-container": "#ffdad6", "surface": "#f7f9fb", "inverse-on-surface": "#eff1f3", "tertiary": "#121a2d", "secondary-container": "#dfe0e0", "surface-tint": "#3d5f93", "on-secondary": "#ffffff", "surface-container-high": "#e6e8ea", "on-tertiary": "#ffffff", "on-background": "#191c1e", "on-tertiary-fixed": "#131b2e", "error": "#ba1a1a", "on-error-container": "#93000a", "surface-dim": "#d8dadc", "on-error": "#ffffff", "surface-container-highest": "#e0e3e5", "primary": "#001a3b", "secondary": "#5d5f5f", "on-primary-fixed": "#001b3d", "surface-container-low": "#f2f4f6", "tertiary-fixed-dim": "#bec6e0", "on-tertiary-container": "#8f96af", "primary-fixed-dim": "#a9c7ff", "outline": "#737780", "on-surface": "#191c1e", "tertiary-fixed": "#dae2fd", "primary-fixed": "#d6e3ff", "inverse-surface": "#2d3133", "on-secondary-fixed": "#1a1c1c", "primary-container": "#002f61", "on-surface-variant": "#43474f", "background": "#f7f9fb", "on-primary": "#ffffff", "inverse-primary": "#a9c7ff", "surface-variant": "#e0e3e5", "surface-container-lowest": "#ffffff", "tertiary-container": "#272f43", "outline-variant": "#c3c6d1", "on-tertiary-fixed-variant": "#3f465c", "on-secondary-container": "#616363", "secondary-fixed-dim": "#c6c6c7", "on-secondary-fixed-variant": "#454747", "secondary-fixed": "#e2e2e2", "on-primary-container": "#7798d0", "surface-bright": "#f7f9fb", "surface-container": "#eceef0", "on-primary-fixed-variant": "#23477a" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.25rem", "space-sm": "0.5rem", "space-md": "0.75rem", "space-lg": "1rem", "gutter": "0.75rem", "margin": "1rem", "space-xl": "1.5rem" }, fontFamily: { "body-lg": ["Inter"], "headline-sm": ["Inter"], "timer-display": ["Inter"], "body-md": ["Inter"], "display-ticket": ["Inter"], "headline-lg": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"], "label-lg": ["Inter"] }, fontSize: { "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "timer-display": ["26px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display-ticket": ["32px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "headline-lg": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Tenant Logo Placeholder" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WVjPJU7O4KCravl068RKz2XZEMRPIo24-1n_klB6ojkiQsQeMW3jhmULYf9hqeKI3WeqlYqy2nMv7Qhx4B9dbQxQfHt6JNZOc5JdkM_HE8BLaAqteZgoWOLIokYrQDnXHsL_u-GSBkFQSF78YjgT6d1ksbf1-XY0C0BZsNWCUZeDqGN-5_N4hVhR6-SYDjrOtwLBNdtnPw72tb_z55f1ZyPIctEg_0mpXZVwg2l_654luVJ7c2r8xUlYc"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary truncate leading-tight">[BUSINESS NAME]</span><div class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></div></div><div class="flex items-center gap-space-xs"><button class="inline-flex items-center gap-1 bg-surface-container-high px-2 py-0.5 rounded-full text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider" type="button"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span><span>Manager</span><span class="material-symbols-outlined text-[14px]">expand_more</span></button><span class="font-label-md text-label-md text-outline truncate">• Operations</span></div></div></div><div class="flex items-center gap-space-xs shrink-0"><button class="relative min-w-[44px] min-h-[44px] w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button"><span class="material-symbols-outlined text-[24px]">notifications</span><span class="absolute top-2 right-2 min-w-[16px] h-4 px-1 rounded-full bg-error text-on-error font-label-sm text-label-sm flex items-center justify-center leading-none">3</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Role Simulation Switcher (Tactile Executive Playground) -->
+<section class="px-margin pt-space-md pb-space-sm bg-surface-container-low shadow-sm">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">switch_account</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Role Preview Matrix</span>
+</div>
+<span class="font-label-sm text-label-sm bg-primary-container text-on-primary px-2 py-0.5 rounded-full">Executive Suite</span>
+</div>
+<!-- Role Switch Buttons (Minimum 48pt touch safeguard) -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 no-scrollbar">
+<button class="role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all whitespace-nowrap shrink-0" id="role-btn-ceo" onclick="selectRole('ceo')" type="button">
+<span class="material-symbols-outlined text-[18px]">query_stats</span>
+<span>CEO / Owner</span>
+</button>
+<button class="role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md transition-all whitespace-nowrap shrink-0" id="role-btn-manager" onclick="selectRole('manager')" type="button">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Manager</span>
+</button>
+<button class="role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md transition-all whitespace-nowrap shrink-0" id="role-btn-waitress" onclick="selectRole('waitress')" type="button">
+<span class="material-symbols-outlined text-[18px]">sports_bar</span>
+<span>Waitress</span>
+</button>
+<button class="role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md transition-all whitespace-nowrap shrink-0" id="role-btn-chef" onclick="selectRole('chef')" type="button">
+<span class="material-symbols-outlined text-[18px]">skillet</span>
+<span>Chef</span>
+</button>
+<button class="role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md transition-all whitespace-nowrap shrink-0" id="role-btn-host" onclick="selectRole('host')" type="button">
+<span class="material-symbols-outlined text-[18px]">meeting_room</span>
+<span>Host / Cabanas</span>
+</button>
+</div>
+<!-- Role Explanation Banner -->
+<div class="mt-space-sm p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-space-sm shadow-sm" id="role-explainer">
+<span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold">CEO & Owner View Active</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-snug">Consolidated live revenue across 4 resort departments, real-time overdue alerts, and fiscal pacing.</span>
+</div>
+</div>
+</section>
+<!-- ==================== VIEW 1: CEO / OWNER EXECUTIVE DASHBOARD ==================== -->
+<div class="flex flex-col w-full" id="view-ceo">
+<!-- Executive Brand Header Strip -->
+<section class="px-margin pt-space-lg pb-space-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm min-w-0">
+<img alt="Tenant Logo Placeholder" class="h-9 w-auto object-contain rounded-md" src="https://lh3.googleusercontent.com/aida/AEtjO1WVjPJU7O4KCravl068RKz2XZEMRPIo24-1n_klB6ojkiQsQeMW3jhmULYf9hqeKI3WeqlYqy2nMv7Qhx4B9dbQxQfHt6JNZOc5JdkM_HE8BLaAqteZgoWOLIokYrQDnXHsL_u-GSBkFQSF78YjgT6d1ksbf1-XY0C0BZsNWCUZeDqGN-5_N4hVhR6-SYDjrOtwLBNdtnPw72tb_z55f1ZyPIctEg_0mpXZVwg2l_654luVJ7c2r8xUlYc"/>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight truncate leading-tight">Azure Point Resort</span>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Executive Overview</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-full text-on-surface font-label-sm text-label-sm shrink-0">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-semibold text-primary">LIVE SYNC</span>
+</div>
+</section>
+<!-- Period Switcher Toggle (48pt touch targets) -->
+<section class="px-margin pt-space-xs pb-space-md">
+<div class="grid grid-cols-3 bg-surface-container-high p-1 rounded-xl">
+<button class="period-tab h-12 flex items-center justify-center font-label-lg text-label-lg rounded-lg bg-surface-container-lowest text-primary shadow-sm font-bold transition-all" id="btn-period-today" onclick="setPeriod('today')" type="button">
+          Today
+        </button>
+<button class="period-tab h-12 flex items-center justify-center font-label-lg text-label-lg rounded-lg text-on-surface-variant font-medium transition-all" id="btn-period-week" onclick="setPeriod('week')" type="button">
+          This Week
+        </button>
+<button class="period-tab h-12 flex items-center justify-center font-label-lg text-label-lg rounded-lg text-on-surface-variant font-medium transition-all" id="btn-period-month" onclick="setPeriod('month')" type="button">
+          This Month
+        </button>
+</div>
+</section>
+<!-- Critical Operational Alert Strip (Bright Red Alert) -->
+<section class="px-margin pb-space-md">
+<div class="w-full bg-error text-on-error p-space-md rounded-xl flex items-center justify-between shadow-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px] text-white animate-bounce">warning</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-error-container font-black">Critical Alert</span>
+<span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+<span class="font-label-sm text-label-sm text-white/90">3 Overdue Tickets</span>
+</div>
+<span class="font-body-md text-body-md text-white font-medium truncate">Barbecue & Main Kitchen • Avg delay 7m</span>
+</div>
+</div>
+<button class="h-10 px-3 bg-white text-error rounded-lg font-label-sm text-label-sm uppercase font-bold shrink-0 shadow-sm flex items-center gap-1 active:scale-95 transition-transform" onclick="selectRole('manager')" type="button">
+<span>Triage</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Master Revenue Hero Card -->
+<section class="px-margin pb-space-md">
+<div class="p-space-lg rounded-xl bg-primary text-on-primary shadow-md relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-primary-container">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-on-primary-container font-bold">Total Gross Revenue</span>
+</div>
+<span class="font-label-sm text-label-sm bg-primary-container text-primary-fixed px-2 py-0.5 rounded-full font-bold">
+            ₦ NGN
+          </span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-display-ticket text-display-ticket tracking-tight text-white font-extrabold">₦3,842,500</span>
+</div>
+<div class="mt-space-xs flex items-center gap-space-sm">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-bold">+14% vs yesterday</span>
+</div>
+<span class="font-body-md text-body-md text-on-primary-container text-[13px]">• 405 resort orders fulfilled</span>
+</div>
+<!-- Micro Sparkline SVG -->
+<div class="mt-space-md pt-space-sm flex items-end justify-between gap-1 h-12">
+<div class="flex flex-col items-center flex-1 h-full justify-end">
+<div class="w-full bg-primary-fixed-dim/40 rounded-t h-[40%]"></div>
+<span class="font-label-sm text-[9px] text-on-primary-container mt-1">11A</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end">
+<div class="w-full bg-primary-fixed-dim/40 rounded-t h-[65%]"></div>
+<span class="font-label-sm text-[9px] text-on-primary-container mt-1">1P</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end">
+<div class="w-full bg-primary-fixed-dim/70 rounded-t h-[85%]"></div>
+<span class="font-label-sm text-[9px] text-on-primary-container mt-1">3P</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end">
+<div class="w-full bg-white rounded-t h-[100%]"></div>
+<span class="font-label-sm text-[9px] text-white font-bold mt-1">5P</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end">
+<div class="w-full bg-primary-fixed-dim/60 rounded-t h-[70%]"></div>
+<span class="font-label-sm text-[9px] text-on-primary-container mt-1">7P</span>
+</div>
+<div class="flex flex-col items-center flex-1 h-full justify-end">
+<div class="w-full bg-primary-fixed-dim/30 rounded-t h-[35%]"></div>
+<span class="font-label-sm text-[9px] text-on-primary-container mt-1">9P</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Department Breakdown Section -->
+<section class="px-margin pb-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">Department Breakdown</h2>
+<span class="font-label-sm text-label-sm text-outline uppercase">4 Outlets Live</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Main Kitchen Card -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[22px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary leading-tight">Main Kitchen</span>
+<span class="font-label-md text-label-md text-on-surface-variant">142 tickets processed</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">₦1,920,000</span>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold">50.0% share</span>
+</div>
+</div>
+<!-- Progress representation -->
+<div class="w-full bg-surface-container h-2 rounded-full mt-space-md overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 50%;"></div>
+</div>
+<div class="mt-space-xs flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<span>Avg prep: 14 mins</span>
+<span class="text-error font-medium">1 Overdue ticket</span>
+</div>
+</div>
+<!-- Barbecue & Grill Card -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-700">
+<span class="material-symbols-outlined text-[22px]">outdoor_grill</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary leading-tight">Barbecue & Grill</span>
+<span class="font-label-md text-label-md text-on-surface-variant">88 tickets processed</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">₦1,150,000</span>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold">29.9% share</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full mt-space-md overflow-hidden">
+<div class="bg-amber-600 h-full rounded-full" style="width: 30%;"></div>
+</div>
+<div class="mt-space-xs flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<span>Avg grill time: 22 mins</span>
+<span class="text-error font-medium">2 Overdue tickets</span>
+</div>
+</div>
+<!-- Ice Cream & Bar Card -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-700">
+<span class="material-symbols-outlined text-[22px]">liquor</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary leading-tight">Ice Cream & Bar</span>
+<span class="font-label-md text-label-md text-on-surface-variant">110 tickets processed</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">₦425,000</span>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold">11.1% share</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full mt-space-md overflow-hidden">
+<div class="bg-sky-600 h-full rounded-full" style="width: 11%;"></div>
+</div>
+<div class="mt-space-xs flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<span>Cocktail speed: 4 mins</span>
+<span class="text-emerald-600 font-medium">All queues on time</span>
+</div>
+</div>
+<!-- Gate & Entry Card -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-700">
+<span class="material-symbols-outlined text-[22px]">confirmation_number</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary leading-tight">Gate & Entry</span>
+<span class="font-label-md text-label-md text-on-surface-variant">65 passes sold</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">₦347,500</span>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold">9.0% share</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full mt-space-md overflow-hidden">
+<div class="bg-purple-600 h-full rounded-full" style="width: 9%;"></div>
+</div>
+<div class="mt-space-xs flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<span>Pool access wristbands</span>
+<span class="text-emerald-600 font-medium">Capacity: 74%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Operational KPI Mini-Grid -->
+<section class="px-margin pb-space-xl">
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Resort Guest Headcount</span>
+<span class="font-headline-lg text-headline-lg text-primary font-bold mt-1">218 Guests</span>
+<span class="font-body-md text-[12px] text-emerald-600 mt-1 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">north_east</span>
+<span>+32 vs last hour</span>
+</span>
+</div>
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Average Ticket Size</span>
+<span class="font-headline-lg text-headline-lg text-primary font-bold mt-1">₦9,487</span>
+<span class="font-body-md text-[12px] text-primary-container mt-1 flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+<span>Steady beverage mix</span>
+</span>
+</div>
+</div>
+</section>
+</div>
+<!-- ==================== VIEW 2: MANAGER HOME (ORDER BOARD DIRECT) ==================== -->
+<div class="flex flex-col w-full hidden" id="view-manager">
+<!-- Sub-Header Filter Bar (Order Lanes) -->
+<div class="px-margin pt-space-md pb-space-sm flex items-center gap-space-xs overflow-x-auto no-scrollbar">
+<button class="h-10 px-4 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold uppercase shrink-0">All Lanes (14)</button>
+<button class="h-10 px-4 rounded-full bg-error text-on-error font-label-sm text-label-sm font-bold uppercase shrink-0 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+<span>Urgent (3)</span>
+</button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase shrink-0">Cabanas (5)</button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase shrink-0">Beach Front (4)</button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase shrink-0">Pool Bar (2)</button>
+</div>
+<!-- Active Tickets Feed -->
+<div class="px-margin flex flex-col gap-space-md pb-space-xl">
+<!-- Urgent Ticket #1 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+<div class="flex items-center justify-between pl-space-xs">
+<div class="flex flex-col">
+<span class="font-display-ticket text-display-ticket text-primary font-extrabold leading-none">CABANA 04</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Server: Amara K. • Ticket #1042</span>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-black uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>22m (OVERDUE)</span>
+</div>
+</div>
+<div class="mt-space-md pl-space-xs flex flex-col gap-1.5 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex justify-between items-center font-body-lg text-body-lg text-primary">
+<span class="font-bold"><span class="text-primary-container font-extrabold">2x</span> Jumbo Grilled Snapper</span>
+<span class="font-semibold">₦28,000</span>
+</div>
+<span class="font-body-md text-body-md italic text-outline">Extra pepper relish on side, lime wedges</span>
+<div class="flex justify-between items-center font-body-lg text-body-lg text-primary mt-1">
+<span class="font-bold"><span class="text-primary-container font-extrabold">1x</span> Chapman Pitcher</span>
+<span class="font-semibold">₦12,500</span>
+</div>
+</div>
+<div class="mt-space-md pl-space-xs grid grid-cols-2 gap-space-sm">
+<button class="h-12 bg-surface-container-high text-primary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-1 active:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Expedite Bar</span>
+</button>
+<button class="h-12 bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-1 shadow-sm active:opacity-90" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Mark Ready</span>
+</button>
+</div>
+</div>
+<!-- In Prep Ticket #2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
+<div class="flex items-center justify-between pl-space-xs">
+<div class="flex flex-col">
+<span class="font-display-ticket text-display-ticket text-primary font-extrabold leading-none">POOL BED 12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Server: Tobi B. • Ticket #1045</span>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm font-black uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>8m (PREP)</span>
+</div>
+</div>
+<div class="mt-space-md pl-space-xs flex flex-col gap-1.5 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex justify-between items-center font-body-lg text-body-lg text-primary">
+<span class="font-bold"><span class="text-primary-container font-extrabold">3x</span> Suya Platter (Beef/Chicken)</span>
+<span class="font-semibold">₦22,500</span>
+</div>
+<div class="flex justify-between items-center font-body-lg text-body-lg text-primary">
+<span class="font-bold"><span class="text-primary-container font-extrabold">4x</span> Fresh Coconut Waters</span>
+<span class="font-semibold">₦8,000</span>
+</div>
+</div>
+<div class="mt-space-md pl-space-xs grid grid-cols-2 gap-space-sm">
+<button class="h-12 bg-surface-container-high text-primary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Reprint</span>
+</button>
+<button class="h-12 bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Mark Ready</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== VIEW 3: WAITRESS HOME SCREEN ==================== -->
+<div class="flex flex-col w-full hidden" id="view-waitress">
+<!-- Massive Take Order Primary CTA Section -->
+<section class="px-margin pt-space-lg pb-space-md">
+<button class="w-full h-24 bg-primary text-on-primary rounded-2xl p-space-md shadow-lg flex items-center justify-between active:scale-[0.98] transition-transform" type="button">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[36px] text-white">add_circle</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-headline-lg text-headline-lg font-extrabold text-white leading-tight">TAKE NEW ORDER</span>
+<span class="font-body-md text-body-md text-on-primary-container">Tap to open interactive resort menu</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[28px] text-white">chevron_right</span>
+</button>
+</section>
+<!-- My Shift Quick Stats -->
+<section class="px-margin pb-space-md">
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-lowest p-space-sm rounded-xl shadow-sm">
+<div class="flex flex-col items-center p-2 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">My Active</span>
+<span class="font-timer-display text-timer-display text-primary font-bold">4</span>
+</div>
+<div class="flex flex-col items-center p-2 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Served</span>
+<span class="font-timer-display text-timer-display text-emerald-600 font-bold">28</span>
+</div>
+<div class="flex flex-col items-center p-2 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Tips Logged</span>
+<span class="font-timer-display text-timer-display text-primary font-bold">₦18.5k</span>
+</div>
+</div>
+</section>
+<!-- Active Timer List for Server -->
+<section class="px-margin pb-space-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">My Active Tables</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">4 Tables Assigned</span>
+</div>
+<!-- Server Card 1: Ready to Deliver -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-emerald-500"></div>
+<div class="flex items-center justify-between pl-space-xs">
+<div>
+<span class="font-headline-lg text-headline-lg font-bold text-primary">CABANA 02</span>
+<div class="font-label-md text-label-md text-emerald-700 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">notifications_active</span>
+<span>READY AT KITCHEN HATCH</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-black">READY</span>
+</div>
+<div class="mt-space-sm pl-space-xs flex items-center justify-between text-on-surface-variant font-body-md text-body-md">
+<span>Grilled Tiger Prawns, 2x Chapman</span>
+<span class="font-bold text-primary">₦34,000</span>
+</div>
+<button class="mt-space-md h-12 w-full bg-emerald-600 text-white rounded-xl font-label-lg text-label-lg font-bold flex items-center justify-center gap-1 shadow-sm active:opacity-90" type="button">
+<span class="material-symbols-outlined text-[18px]">delivery_dining</span>
+<span>Pick Up & Deliver</span>
+</button>
+</div>
+<!-- Server Card 2: Still Cooking -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-500"></div>
+<div class="flex items-center justify-between pl-space-xs">
+<div>
+<span class="font-headline-lg text-headline-lg font-bold text-primary">SUN LOUNGER 08</span>
+<span class="font-label-md text-label-md text-on-surface-variant block">Grill station preparing</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm font-black">6 MINS LEFT</span>
+</div>
+<div class="mt-space-sm pl-space-xs flex items-center justify-between text-on-surface-variant font-body-md text-body-md">
+<span>Club Sandwich, Fries, Fresh Lemonade</span>
+<span class="font-bold text-primary">₦14,200</span>
+</div>
+</div>
+</section>
+</div>
+<!-- ==================== VIEW 4: CHEF HOME SCREEN ==================== -->
+<div class="flex flex-col w-full hidden" id="view-chef">
+<!-- Chef Department Identifier Header -->
+<div class="px-margin pt-space-md pb-space-sm flex items-center justify-between bg-surface-container-high mx-margin rounded-xl p-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">skillet</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Barbecue & Grill Lane</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Chef Babatunde • Station 1</span>
+</div>
+</div>
+<div class="px-3 py-1 bg-primary-container text-on-primary rounded-full font-label-sm text-label-sm font-bold">
+        6 Active
+      </div>
+</div>
+<!-- Kitchen Queue Items -->
+<div class="px-margin pt-space-md flex flex-col gap-space-md pb-space-xl">
+<!-- High priority ticket -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col">
+<div class="flex items-center justify-between pb-space-sm">
+<span class="font-timer-display text-timer-display text-primary font-black">TICKET #1041</span>
+<span class="px-2.5 py-1 rounded-md bg-error text-on-error font-label-sm text-label-sm font-bold">18m - LATE</span>
+</div>
+<div class="space-y-2 p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">3x Spicy Asun Goat Meat</span>
+<span class="font-label-md text-label-md bg-error-container text-on-error-container px-2 py-0.5 rounded font-bold">EXTRA PEPPER</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">2x Grilled Sweet Corn</span>
+<span class="font-label-md text-label-md text-outline">Butter glaze</span>
+</div>
+</div>
+<div class="mt-space-md grid grid-cols-2 gap-space-sm">
+<button class="h-14 bg-surface-container-high text-primary rounded-xl font-headline-sm text-headline-sm font-bold flex items-center justify-center" type="button">
+            Delay 5m
+          </button>
+<button class="h-14 bg-emerald-600 text-white rounded-xl font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-1 shadow-md" type="button">
+<span class="material-symbols-outlined text-[22px]">done_all</span>
+<span>BUMP ORDER</span>
+</button>
+</div>
+</div>
+<!-- Queue ticket 2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col opacity-90">
+<div class="flex items-center justify-between pb-space-sm">
+<span class="font-timer-display text-timer-display text-primary font-black">TICKET #1044</span>
+<span class="px-2.5 py-1 rounded-md bg-amber-100 text-amber-800 font-label-sm text-label-sm font-bold">7m ELAPSED</span>
+</div>
+<div class="space-y-2 p-space-sm bg-surface-container-low rounded-lg">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">1x Whole Tilapia Charcoal Grill</span>
+<span class="font-label-md text-label-md bg-surface-container-high px-2 py-0.5 rounded font-bold">WELL DONE</span>
+</div>
+</div>
+<div class="mt-space-md">
+<button class="h-14 w-full bg-emerald-600 text-white rounded-xl font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-1 shadow-md" type="button">
+<span class="material-symbols-outlined text-[22px]">done_all</span>
+<span>BUMP ORDER</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== VIEW 5: HOST HOME SCREEN (AVAILABILITY GRID) ==================== -->
+<div class="flex flex-col w-full hidden" id="view-host">
+<!-- Occupancy Meter Strip -->
+<section class="px-margin pt-space-md pb-space-sm">
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Resort Capacity</span>
+<span class="font-headline-sm text-headline-sm text-primary font-black">34 / 42 Occupied (81%)</span>
+</div>
+<div class="w-full bg-surface-container h-3 rounded-full overflow-hidden flex">
+<div class="bg-emerald-600 h-full" style="width: 60%;"></div>
+<div class="bg-amber-500 h-full" style="width: 21%;"></div>
+<div class="bg-surface-container-high h-full" style="width: 19%;"></div>
+</div>
+<div class="mt-space-sm flex justify-between items-center text-[12px] font-label-sm text-label-sm">
+<span class="flex items-center gap-1 text-emerald-700 font-semibold"><span class="w-2 h-2 rounded-full bg-emerald-600"></span> Occupied (25)</span>
+<span class="flex items-center gap-1 text-amber-700 font-semibold"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Reserved (9)</span>
+<span class="flex items-center gap-1 text-on-surface-variant font-semibold"><span class="w-2 h-2 rounded-full bg-surface-dim"></span> Open (8)</span>
+</div>
+</div>
+</section>
+<!-- Zone Category Tabs -->
+<div class="px-margin pb-space-sm flex items-center gap-space-xs overflow-x-auto no-scrollbar">
+<button class="h-10 px-4 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold uppercase shrink-0">Cabanas (8)</button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase shrink-0">VIP Sunbeds (18)</button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase shrink-0">Beach Cabins (6)</button>
+<button class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase shrink-0">Patio Tables (10)</button>
+</div>
+<!-- Live Availability Matrix Grid -->
+<section class="px-margin pb-space-xl">
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Cabana 1 (Occupied) -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between h-36 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm font-extrabold text-primary">CABANA 01</span>
+<span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-on-surface">Dr. Adeyemi Group</span>
+<span class="font-label-sm text-label-sm text-outline block">6 Guests • In: 1:30 PM</span>
+</div>
+<button class="h-9 px-3 bg-surface-container-high text-primary rounded-lg font-label-sm text-label-sm font-bold w-full text-center" type="button">
+            View Tab (₦84k)
+          </button>
+</div>
+<!-- Cabana 2 (Occupied) -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between h-36 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm font-extrabold text-primary">CABANA 02</span>
+<span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-on-surface">Okonkwo Family</span>
+<span class="font-label-sm text-label-sm text-outline block">4 Guests • In: 2:15 PM</span>
+</div>
+<button class="h-9 px-3 bg-surface-container-high text-primary rounded-lg font-label-sm text-label-sm font-bold w-full text-center" type="button">
+            View Tab (₦46k)
+          </button>
+</div>
+<!-- Cabana 3 (Available Clean) -->
+<div class="p-space-md bg-emerald-50 rounded-xl shadow-sm flex flex-col justify-between h-36 border-2 border-dashed border-emerald-400">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm font-extrabold text-emerald-950">CABANA 03</span>
+<span class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-900 font-label-sm text-label-sm font-bold">VACANT</span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-emerald-900">Sanitized & Ready</span>
+<span class="font-label-sm text-label-sm text-emerald-700 block">Up to 8 Guests</span>
+</div>
+<button class="h-9 px-3 bg-emerald-600 text-white rounded-lg font-label-sm text-label-sm font-bold w-full text-center shadow-sm" type="button">
+            Seat Walk-In (+)
+          </button>
+</div>
+<!-- Cabana 4 (Reserved) -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between h-36">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm font-extrabold text-primary">CABANA 04</span>
+<span class="w-3 h-3 rounded-full bg-amber-500"></span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-on-surface">Reserved: 5:00 PM</span>
+<span class="font-label-sm text-label-sm text-amber-800 font-medium block">Folake Birthday VIP</span>
+</div>
+<button class="h-9 px-3 bg-amber-100 text-amber-900 rounded-lg font-label-sm text-label-sm font-bold w-full text-center" type="button">
+            Check-In Arrival
+          </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Role Comparison Guide Bottom Drawer -->
+<section class="mt-space-md px-margin pb-space-xl">
+<div class="p-space-md bg-surface-container rounded-xl flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider mb-space-xs">Multi-Role Architecture Reference</span>
+<div class="space-y-2 text-on-surface-variant font-body-md text-body-md text-[13px]">
+<div class="flex items-start gap-2">
+<span class="font-bold text-primary shrink-0 w-16">CEO View:</span>
+<span>Aggregated multi-department revenues, Nigerian Naira totals, overdue alerts strip, macro throughput.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="font-bold text-primary shrink-0 w-16">Manager:</span>
+<span>Tactical live order board triage directly on launch with SLA delay timers and fast reassignment.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="font-bold text-primary shrink-0 w-16">Waitress:</span>
+<span>High-visibility thumb actions, full 48pt touch targets, quick order creation and active food timers.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="font-bold text-primary shrink-0 w-16">Chef:</span>
+<span>Kitchen display system lane locked strictly to department station tickets with single-tap bump actions.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="font-bold text-primary shrink-0 w-16">Host:</span>
+<span>Live spatial layout for cabanas, poolside sunbeds, and hospitality cabin status.</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function selectRole(roleId) {
+    const roles = ['ceo', 'manager', 'waitress', 'chef', 'host'];
+    const roleMeta = {
+      ceo: { title: 'CEO & Owner View Active', desc: 'Consolidated live revenue across 4 resort departments, real-time overdue alerts, and fiscal pacing.' },
+      manager: { title: 'Manager Order Board Active', desc: 'Real-time order board lanes directly as home screen for fast outdoor floor dispatch.' },
+      waitress: { title: 'Waitress Fast-Action Home', desc: 'High-contrast large touch targets, immediate order creation, and ready-to-deliver food alerts.' },
+      chef: { title: 'Kitchen Line Station Display', desc: 'Chef station ticket view tailored specifically for barbecue and hot grill preparation.' },
+      host: { title: 'Host Live Availability Grid', desc: 'Live resort occupancy, cabana turns, sunbed reservations, and guest intake.' }
+    };
+
+    roles.forEach(r => {
+      const viewEl = document.getElementById('view-' + r);
+      const btnEl = document.getElementById('role-btn-' + r);
+      if (viewEl) {
+        if (r === roleId) {
+          viewEl.classList.remove('hidden');
+        } else {
+          viewEl.classList.add('hidden');
+        }
+      }
+      if (btnEl) {
+        if (r === roleId) {
+          btnEl.className = 'role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all whitespace-nowrap shrink-0';
+        } else {
+          btnEl.className = 'role-pill flex items-center gap-1.5 h-12 px-space-md rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md transition-all whitespace-nowrap shrink-0';
+        }
+      }
+    });
+
+    const explainer = document.getElementById('role-explainer');
+    if (explainer && roleMeta[roleId]) {
+      explainer.innerHTML = `
+        <span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">verified_user</span>
+        <div class="flex flex-col min-w-0">
+          <span class="font-label-md text-label-md text-primary font-bold">${roleMeta[roleId].title}</span>
+          <span class="font-body-md text-body-md text-on-surface-variant text-[13px] leading-snug">${roleMeta[roleId].desc}</span>
+        </div>
+      `;
+    }
+  }
+
+  function setPeriod(period) {
+    const tabs = ['today', 'week', 'month'];
+    tabs.forEach(t => {
+      const el = document.getElementById('btn-period-' + t);
+      if (el) {
+        if (t === period) {
+          el.className = 'period-tab h-12 flex items-center justify-center font-label-lg text-label-lg rounded-lg bg-surface-container-lowest text-primary shadow-sm font-bold transition-all';
+        } else {
+          el.className = 'period-tab h-12 flex items-center justify-center font-label-lg text-label-lg rounded-lg text-on-surface-variant font-medium transition-all';
+        }
+      }
+    });
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.05)]" data-active-classes="text-primary-container font-bold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex flex-col items-center justify-center flex-1 h-full min-h-[48px] py-1 text-on-surface-variant hover:text-primary transition-all" data-path="order-board" href="#"><span class="material-symbols-outlined text-[24px]">local_fire_department</span><span class="font-label-sm text-label-sm tracking-tight mt-0.5">Orders</span></a><a class="flex flex-col items-center justify-center flex-1 h-full min-h-[48px] py-1 text-on-surface-variant hover:text-primary transition-all" data-path="new-order" href="#"><span class="material-symbols-outlined text-[24px]">add_circle</span><span class="font-label-sm text-label-sm tracking-tight mt-0.5">Take Order</span></a><a class="flex flex-col items-center justify-center flex-1 h-full min-h-[48px] py-1 text-on-surface-variant hover:text-primary transition-all" data-path="kitchen" href="#"><span class="material-symbols-outlined text-[24px]">skillet</span><span class="font-label-sm text-label-sm tracking-tight mt-0.5">Kitchen</span></a><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full min-h-[48px] py-1 transition-all text-primary-container font-bold" data-path="operations" href="#"><span class="material-symbols-outlined text-[24px]">bar_chart</span><span class="font-label-sm text-label-sm tracking-tight mt-0.5">Ops</span></a><a class="flex flex-col items-center justify-center flex-1 h-full min-h-[48px] py-1 text-on-surface-variant hover:text-primary transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-[24px]">tune</span><span class="font-label-sm text-label-sm tracking-tight mt-0.5">Settings</span></a></div></nav></body></html>

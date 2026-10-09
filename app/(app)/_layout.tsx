@@ -8,14 +8,14 @@ import { homeForRoles } from '@/lib/roles';
 import { Loading } from '@/components/ui';
 import { colors, fonts } from '@/theme';
 
-type TabName = 'board' | 'order' | 'kitchen' | 'revenue' | 'hosts' | 'account' | 'menu' | 'myorders';
+type TabName = 'board' | 'order' | 'kitchen' | 'revenue' | 'hosts' | 'account' | 'menu' | 'myorders' | 'staff' | 'tables';
 
 /** Which tabs each home surfaces. Manager matches spec J's five-tab bar. */
 const TABS_BY_HOME: Record<string, TabName[]> = {
   manager: ['board', 'order', 'kitchen', 'revenue', 'account'],
   waitress: ['myorders', 'order', 'account'],
   chef: ['kitchen', 'account'],
-  ceo: ['revenue', 'account'],
+  ceo: ['board', 'revenue', 'account'],
   host: ['hosts', 'account'],
 };
 
@@ -30,6 +30,8 @@ const ICONS: Record<TabName, keyof typeof MaterialIcons.glyphMap> = {
   account: 'tune',
   menu: 'restaurant-menu',
   myorders: 'receipt-long',
+  staff: 'people',
+  tables: 'deck',
 };
 
 const LABELS: Record<TabName, string> = {
@@ -41,6 +43,8 @@ const LABELS: Record<TabName, string> = {
   account: 'Settings',
   menu: 'Menu',
   myorders: 'My Orders',
+  staff: 'Staff',
+  tables: 'Tables',
 };
 
 export default function AppLayout() {
@@ -64,7 +68,7 @@ export default function AppLayout() {
   const home = homeForRoles(me.data.user.roles);
   const visible = new Set(TABS_BY_HOME[home] ?? ['account']);
   // 'menu' is a navigable route (manager menu management), never a tab.
-  const allTabs: TabName[] = ['board', 'order', 'kitchen', 'revenue', 'hosts', 'account', 'menu', 'myorders'];
+  const allTabs: TabName[] = ['board', 'order', 'kitchen', 'revenue', 'hosts', 'account', 'menu', 'myorders', 'staff', 'tables'];
 
   return (
     <Tabs
