@@ -36,3 +36,7 @@ hospitality_operations_mobile/
 manager_settings_gate_sales/
 order_board_states_detail_sheet/
 waitress_take_an_order/
+
+# Lockfile is generated per-platform; let EAS resolve on Linux (Windows lock
+# omits Linux-only deps like react-native-reanimated, breaking `npm ci`).
+package-lock.json
