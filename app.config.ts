@@ -1,5 +1,11 @@
 /// <reference types="node" />
+import { existsSync } from 'node:fs';
 import { ExpoConfig, ConfigContext } from 'expo/config';
+
+// Android push (FCM) needs google-services.json embedded at build time. Only
+// reference it when it's actually present so builds don't break before you add
+// it. Drop the file from Firebase at the project root and it's picked up.
+const googleServicesFile = existsSync('./google-services.json') ? './google-services.json' : undefined;
 
 /**
  * Three build variants (dev / staging / prod). EAS sets APP_VARIANT per profile
@@ -49,6 +55,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: BUNDLE_ID_BY_VARIANT[VARIANT],
+    ...(googleServicesFile ? { googleServicesFile } : {}),
     adaptiveIcon: {
       backgroundColor: '#002F61',
       foregroundImage: './assets/android-icon-foreground.png',

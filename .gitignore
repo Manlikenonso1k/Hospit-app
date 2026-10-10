@@ -19,6 +19,11 @@ android/
 *.p12
 *.key
 *.mobileprovision
+# FCM / Firebase service-account private key — NEVER commit (upload via `eas credentials`).
+# NOTE: google-services.json is intentionally NOT ignored — it must ship in the build.
+*service-account*.json
+firebase-adminsdk*.json
+google-service-account*.json
 
 # OS
 .DS_Store
