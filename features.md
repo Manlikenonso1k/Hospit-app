@@ -72,6 +72,9 @@ _Last updated: 2026-10-09_
   are overdue right now and the average delay, with one tap through to triage.
 - **Create manager *and* floor accounts.** Owners add managers, waiters, chefs
   and hosts directly — staffing can be delegated or kept in the owner's hands.
+- **Hand off any order.** Managers and owners can transfer any order to a
+  waitress, or to a chef on that order's station — the recipient accepts, so
+  nothing moves without someone taking ownership.
 
 ## For waiters
 

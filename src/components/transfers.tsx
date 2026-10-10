@@ -49,8 +49,12 @@ export function SendTransferButton({ order }: { order: Order }) {
           <ScrollView style={{ maxHeight: 320 }} contentContainerStyle={{ gap: 8, paddingVertical: 8 }}>
             {targets.isLoading ? (
               <Text style={styles.muted}>Loading teammates…</Text>
+            ) : targets.isError ? (
+              <Text style={styles.muted}>Couldn&apos;t load teammates. Pull to retry.</Text>
             ) : (targets.data?.data ?? []).length === 0 ? (
-              <Text style={styles.muted}>No eligible teammate to send this to.</Text>
+              <Text style={styles.muted}>
+                No one to send this to yet. Add more staff in Settings → Team, then try again.
+              </Text>
             ) : (
               (targets.data?.data ?? []).map((t) => (
                 <Pressable key={t.id} style={styles.target} onPress={() => offer(t.id)} disabled={send.isPending}>
