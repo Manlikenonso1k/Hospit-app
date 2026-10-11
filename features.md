@@ -112,6 +112,11 @@ _Last updated: 2026-10-09_
   on a loud, busy floor, even with the phone in a pocket. One tap in Settings
   turns alert sounds off.
 - **Push notifications** on real devices for the moments that matter.
+- **Overdue orders page you even when the app is closed.** A server-side sweep
+  re-pages the manager, the kitchen and the waiter every 5 minutes until the
+  order is resolved — a loud, high-priority "Overdue orders" alert with a custom
+  alarm sound, heads-up popup and lock-screen visibility. Its own named Android
+  channel means staff can swap the sound for any ringtone in phone settings.
 - **Notification bell** with a live unread count on every screen.
 
 ## Platform & trust

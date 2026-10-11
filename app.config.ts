@@ -84,6 +84,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       'expo-notifications',
       {
         color: '#002F61',
+        // Bundles the custom alarm as a native sound resource ("overdue_alarm"),
+        // used by the loud "overdue-orders" notification channel.
+        sounds: ['./assets/sounds/overdue_alarm.wav'],
       },
     ],
   ],
